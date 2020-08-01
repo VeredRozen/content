@@ -320,7 +320,6 @@ jobs:
     <<: *environment
     steps:
       - checkout
-      - *restore_cache
       - *prepare_environment
       - save_cache:
           paths:
@@ -341,7 +340,6 @@ jobs:
           condition: << pipeline.parameters.instance_tests >>
           steps:
             - setup_remote_docker
-            - *restore_cache
             - *add_ssh_keys
             - *prepare_environment
             - *infrastructure_testing
@@ -364,7 +362,6 @@ jobs:
       - unless:
           condition: << pipeline.parameters.instance_tests >>
           steps:
-            - *restore_cache
             - *add_ssh_keys
             - *prepare_environment
             - *secrets
